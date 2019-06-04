@@ -11,9 +11,9 @@ namespace WE\SpreadsheetImport\Domain\Repository;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Persistence\QueryInterface;
-use TYPO3\Flow\Persistence\Repository;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\QueryInterface;
+use Neos\Flow\Persistence\Repository;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 
 /**
@@ -44,7 +44,7 @@ class SpreadsheetImportRepository extends Repository {
 	 * @param \DateTime $dateTime
 	 * @param int $importingStatus
 	 *
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return \Neos\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBySpecificDateTimeAndImportingStatus(\DateTime $dateTime, $importingStatus = -1) {
 		$query = $this->createQuery();
@@ -59,7 +59,7 @@ class SpreadsheetImportRepository extends Repository {
 	 * @param string $context
 	 * @param array $arguments
 	 *
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return \Neos\Flow\Persistence\QueryResultInterface
 	 */
 	public function findByContextAndArguments($context, $arguments = array()) {
 		$query = $this->createQuery();

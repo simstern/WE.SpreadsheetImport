@@ -14,5 +14,5 @@ namespace WE\SpreadsheetImport\Exception;
 /**
  * Generic SpreadsheetImport Exception
  */
-class Exception extends \TYPO3\Flow\Exception  {
+class Exception extends \Neos\Flow\Exception  {
 }

@@ -11,8 +11,8 @@ namespace WE\SpreadsheetImport;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\ActionRequest;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\ActionRequest;
 use WE\SpreadsheetImport\Annotations\Mapping;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 use WE\SpreadsheetImport\Exception\Exception;
@@ -38,25 +38,25 @@ class FrontendMappingService {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 * @var \Neos\Flow\Persistence\PersistenceManagerInterface
 	 */
 	protected $persistenceManager;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Property\PropertyMapper
+	 * @var \Neos\Flow\Property\PropertyMapper
 	 */
 	protected $propertyMapper;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Validation\ValidatorResolver
+	 * @var \Neos\Flow\Validation\ValidatorResolver
 	 */
 	protected $validatorResolver;
 
 	/**
 	 * @param string $context
-	 * @param \TYPO3\Flow\Mvc\ActionRequest $request
+	 * @param \Neos\Flow\Mvc\ActionRequest $request
 	 *
 	 * @throws \WE\SpreadsheetImport\Exception\Exception
 	 * @return array

@@ -14,5 +14,5 @@ namespace WE\SpreadsheetImport\Log;
 /**
  * Logger interface for the SpreadsheetImport package
  */
-interface SpreadsheetImportLoggerInterface extends \TYPO3\Flow\Log\LoggerInterface {
+interface SpreadsheetImportLoggerInterface extends \Neos\Flow\Log\LoggerInterface {
 }

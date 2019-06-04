@@ -11,9 +11,9 @@ namespace WE\SpreadsheetImport\Tests\Functional;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Reflection\ReflectionService;
-use TYPO3\Flow\Resource\ResourceManager;
-use TYPO3\Flow\Tests\FunctionalTestCase;
+use Neos\Flow\Reflection\ReflectionService;
+use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Flow\Tests\FunctionalTestCase;
 use WE\SpreadsheetImport\Annotations\Mapping;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 use WE\SpreadsheetImport\SpreadsheetImportService;
@@ -28,7 +28,7 @@ class SpreadsheetImportServiceTest extends FunctionalTestCase {
 	protected $spreadsheetImportService;
 
 	/**
-	 * @var \TYPO3\Flow\Resource\ResourceManager
+	 * @var \Neos\Flow\ResourceManagement\ResourceManager
 	 */
 	protected $resourceManager;
 
@@ -48,11 +48,11 @@ class SpreadsheetImportServiceTest extends FunctionalTestCase {
 	 * @return void
 	 */
 	public function tearDown() {
-		$persistenceManager = $this->objectManager->get('TYPO3\Flow\Persistence\PersistenceManagerInterface');
+		$persistenceManager = $this->objectManager->get('Neos\Flow\Persistence\PersistenceManagerInterface');
 		if (is_callable(array($persistenceManager, 'tearDown'))) {
 			$persistenceManager->tearDown();
 		}
-		$this->objectManager->forgetInstance('TYPO3\Flow\Persistence\PersistenceManagerInterface');
+		$this->objectManager->forgetInstance('Neos\Flow\Persistence\PersistenceManagerInterface');
 		parent::tearDown();
 	}
 

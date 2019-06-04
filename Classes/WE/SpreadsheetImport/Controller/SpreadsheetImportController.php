@@ -11,8 +11,8 @@ namespace WE\SpreadsheetImport\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Controller\ActionController;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 
 /**
@@ -48,7 +48,7 @@ class SpreadsheetImportController extends ActionController {
 	 */
 	protected function initializeCreateAction() {
 		$this->arguments['newSpreadsheetImport']->getPropertyMappingConfiguration()->forProperty('scheduleDate')
-			->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\DateTimeConverter', \TYPO3\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+			->setTypeConverterOption('Neos\Flow\Property\TypeConverter\DateTimeConverter', \Neos\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 	}
 
 	/**

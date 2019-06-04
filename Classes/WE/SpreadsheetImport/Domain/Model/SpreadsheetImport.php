@@ -11,7 +11,7 @@ namespace WE\SpreadsheetImport\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +33,7 @@ class SpreadsheetImport {
 
 	/**
 	 * @ORM\OneToOne(orphanRemoval=true, cascade={"persist", "remove"})
-	 * @var \TYPO3\Flow\Resource\Resource
+	 * @var \Neos\Flow\ResourceManagement\PersistentResource
 	 */
 	protected $file;
 
@@ -127,14 +127,14 @@ class SpreadsheetImport {
 	}
 
 	/**
-	 * @return \TYPO3\Flow\Resource\Resource
+	 * @return \Neos\Flow\ResourceManagement\PersistentResource
 	 */
 	public function getFile() {
 		return $this->file;
 	}
 
 	/**
-	 * @param \TYPO3\Flow\Resource\Resource $file
+	 * @param \Neos\Flow\ResourceManagement\PersistentResource $file
 	 */
 	public function setFile($file) {
 		$this->file = $file;

@@ -11,8 +11,8 @@ namespace WE\SpreadsheetImport;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Persistence\RepositoryInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\RepositoryInterface;
 use WE\SpreadsheetImport\Annotations\Mapping;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 use WE\SpreadsheetImport\Exception\Exception;
@@ -54,31 +54,31 @@ class SpreadsheetImportService {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Reflection\ReflectionService
+	 * @var \Neos\Flow\Reflection\ReflectionService
 	 */
 	protected $reflectionService;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 * @var \Neos\Flow\Persistence\PersistenceManagerInterface
 	 */
 	protected $persistenceManager;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
+	 * @var \Neos\Flow\ObjectManagement\ObjectManagerInterface
 	 */
 	protected $objectManager;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Property\PropertyMapper
+	 * @var \Neos\Flow\Property\PropertyMapper
 	 */
 	protected $propertyMapper;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Validation\ValidatorResolver
+	 * @var \Neos\Flow\Validation\ValidatorResolver
 	 */
 	protected $validatorResolver;
 
@@ -350,7 +350,7 @@ class SpreadsheetImportService {
 	/**
 	 * @param array $identifiers
 	 *
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return \Neos\Flow\Persistence\QueryResultInterface
 	 */
 	private function findObjectsByArgumentsAndExcludedIds(array $identifiers) {
 		$query = $this->getDomainRepository()->createQuery();
@@ -496,7 +496,7 @@ class SpreadsheetImportService {
 	}
 
 	/**
-	 * @return \TYPO3\Flow\Persistence\RepositoryInterface
+	 * @return \Neos\Flow\Persistence\RepositoryInterface
 	 */
 	private function getDomainRepository() {
 		$repositoryClassName = preg_replace(array('/\\\Model\\\/', '/$/'), array('\\Repository\\', 'Repository'), $this->domain);

@@ -11,8 +11,8 @@ namespace WE\SpreadsheetImport\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Cli\CommandController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 
 /**
@@ -40,7 +40,7 @@ class SpreadsheetImportCommandController extends CommandController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 * @var \Neos\Flow\Persistence\PersistenceManagerInterface
 	 */
 	protected $persistenceManager;
 
