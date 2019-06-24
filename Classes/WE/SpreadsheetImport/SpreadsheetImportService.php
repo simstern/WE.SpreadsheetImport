@@ -13,6 +13,9 @@ namespace WE\SpreadsheetImport;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\RepositoryInterface;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Worksheet\Row;
 use WE\SpreadsheetImport\Annotations\Mapping;
 use WE\SpreadsheetImport\Domain\Model\SpreadsheetImport;
 use WE\SpreadsheetImport\Exception\Exception;
@@ -157,7 +160,7 @@ class SpreadsheetImportService {
 	/**
 	 * Returns the total records of the spreadsheet excluding the header row
 	 *
-	 * @return array
+	 * @return int
 	 */
 	public function getTotalRecords() {
 		$sheet = $this->getFileActiveSheet();
@@ -181,7 +184,7 @@ class SpreadsheetImportService {
 		$row = $sheet->getRowIterator(1, 1)->current();
 		$cellIterator = $row->getCellIterator();
 		$cellIterator->setIterateOnlyExistingCells(FALSE);
-		/** @var \PHPExcel_Cell $cell */
+		/** @var Cell $cell */
 		foreach ($cellIterator as $cell) {
 			$columns[$cell->getColumn()] = $cell->getValue();
 			if ($cell->getColumn() === $highestColumn) {
@@ -229,7 +232,6 @@ class SpreadsheetImportService {
 		}
 		$persistRecordsChunkSize = intval($this->settings['persistRecordsChunkSize']);
 		$totalCount = 0;
-		/** @var \PHPExcel_Worksheet_Row $row */
 		foreach ($sheet->getRowIterator(2) as $row) {
 			$recordNumber = $row->getRowIndex() - 1;
 			$totalCount++;
@@ -301,11 +303,11 @@ class SpreadsheetImportService {
 	/**
 	 * Return the active sheet of a spreadsheet. Other potential sheets are ignored on the import.
 	 *
-	 * @return \PHPExcel_Worksheet
+     * @return \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet
 	 */
 	private function getFileActiveSheet() {
 		$file = $this->spreadsheetImport->getFile()->createTemporaryLocalCopy();
-		$reader = \PHPExcel_IOFactory::load($file);
+		$reader = IOFactory::load($file);
 		$sheet = $reader->getActiveSheet();
 		return $sheet;
 	}
@@ -313,11 +315,11 @@ class SpreadsheetImportService {
 	/**
 	 * Returns an existing object found or null for a specific row.
 	 *
-	 * @param \PHPExcel_Worksheet_Row $row
+	 * @param Row $row
 	 *
 	 * @return null|object
 	 */
-	private function findExistingObjectByRow(\PHPExcel_Worksheet_Row $row) {
+	private function findExistingObjectByRow(Row $row) {
 		$query = $this->getDomainRepository()->createQuery();
 		$constraints = array();
 		$mappingIdentifierProperties = $this->getMappingIdentifierProperties();
@@ -326,7 +328,6 @@ class SpreadsheetImportService {
 			/** @var Mapping $mapping */
 			$mapping = $columnMapping['mapping'];
 			$propertyName = $mapping->queryPropertyName ?: $property;
-			/** @var \PHPExcel_Worksheet_RowCellIterator $cellIterator */
 			$cellIterator = $row->getCellIterator($column, $column);
 			$value = $cellIterator->current()->getValue();
 			$constraints[] = $query->equals($propertyName, $value);
@@ -369,7 +370,7 @@ class SpreadsheetImportService {
 
 	/**
 	 * @param object $object
-	 * @param \PHPExcel_Worksheet_Row $row
+	 * @param Row $row
 	 */
 	private function setObjectPropertiesByRow($object, $row) {
 		/* Set the argument properties before the mapping properties, as mapping property setters might be dependent on
@@ -402,11 +403,11 @@ class SpreadsheetImportService {
 
 	/**
 	 * @param object $object
-	 * @param \PHPExcel_Worksheet_Row $row
+	 * @param Row $row
 	 */
 	private function setObjectMappingProperties($object, $row) {
 		$inverseMappingProperties = $this->getInverseMappingProperties();
-		/** @var \PHPExcel_Cell $cell */
+		/** @var Cell $cell */
 		foreach ($row->getCellIterator() as $cell) {
 			$column = $cell->getColumn();
 			if (array_key_exists($column, $inverseMappingProperties)) {
